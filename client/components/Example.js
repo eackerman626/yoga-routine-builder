@@ -5,30 +5,36 @@ import { fetchExamples } from '../store/example';
 
 class Example extends Component {
 	componentDidMount() {
-		try {
-			this.props.loadExamples();
-		} catch (error) {
-			console.error(error);
-		}
+		this.props.loadExamples();
 	}
 
 	render() {
 		const exampleState = this.props.exampleState;
 
-		return <div>Example HTML</div>;
+		return (
+			<div>
+				Example HTML
+				<ul>
+					List of examples:
+					{exampleState.map((ex) => {
+						return <li key={ex.id}>{ex.name}</li>;
+					})}
+				</ul>
+			</div>
+		);
 	}
 }
 
 const mapStateToProps = (state) => {
 	console.log('Inside mapStateToProps, state: ', state);
 	return {
-		exampleState: state.example,
+		exampleState: state.examples,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadExamples: dispatch(fetchExamples()),
+		loadExamples: () => dispatch(fetchExamples()),
 	};
 };
 
