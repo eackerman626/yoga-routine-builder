@@ -26,7 +26,6 @@ class Example extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log('Inside mapStateToProps, state: ', state);
 	return {
 		exampleState: state.examples,
 	};

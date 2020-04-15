@@ -11,20 +11,18 @@ const setExamples = (examplePayload) => ({
 
 // THUNK CREATOR
 export const fetchExamples = () => {
-	// debugger;
-	// ***************** for some reason the async is causing a problem here (currently removed) ******************
 	return async (dispatch) => {
 		try {
 			// normally, some sort of axios request, e.g.:
-			// const results = await axios.get('/api/examples');
-			// const examples = results.data;
+			const results = await axios.get('/api/exampleRoute');
+			const examples = results.data;
 
 			// for testing, set examples to be an object
-			const examples = [
-				{ id: 1, name: 'example1' },
-				{ id: 2, name: 'example2' },
-				{ id: 3, name: 'example3' },
-			];
+			// const examples = [
+			// 	{ id: 1, name: 'example1' },
+			// 	{ id: 2, name: 'example2' },
+			// 	{ id: 3, name: 'example3' },
+			// ];
 
 			dispatch(setExamples(examples));
 		} catch (err) {

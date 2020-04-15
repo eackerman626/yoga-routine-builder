@@ -1,5 +1,5 @@
 module.exports = {
-	entry: './client/index.js', // make sure entry point is index.js in client folder
+	entry: ['@babel/polyfill', './client/index.js'], // make sure entry point is index.js in client folder
 	mode: 'development',
 	output: {
 		path: __dirname,
@@ -17,6 +17,10 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 				},
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader'],
 			},
 		],
 	},

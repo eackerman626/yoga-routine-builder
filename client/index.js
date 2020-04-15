@@ -6,6 +6,9 @@ import Main from './components/Main';
 import { Provider } from 'react-redux';
 import store from './store';
 
+// styling
+import './index.css';
+
 ReactDOM.render(
 	<Provider store={store}>
 		<div>Hello, world!</div>
