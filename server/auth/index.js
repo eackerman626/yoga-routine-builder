@@ -25,4 +25,25 @@ router.put('/login', (req, res, next) => {
 		.catch(next);
 });
 
+router.post('/signup', (req, res, next) => {
+	User.create(req.body)
+		.then((user) => {
+			req.login(user, (err) => {
+				if (err) next(err);
+				else
+					res.json({
+						id: user.id,
+						email: user.email,
+					});
+			});
+		})
+		.catch(next);
+});
+
+router.delete('/logout', (req, res, next) => {
+	req.logout();
+	req.session.destroy();
+	res.sendStatus(204);
+});
+
 module.exports = router;
