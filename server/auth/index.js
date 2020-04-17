@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const { User } = require('../db');
+const googleRouter = require('./google');
+
+router.use('/google', googleRouter);
 
 // PUT /auth/login
 router.put('/login', (req, res, next) => {
@@ -25,6 +28,7 @@ router.put('/login', (req, res, next) => {
 		.catch(next);
 });
 
+// POST /auth/signup
 router.post('/signup', (req, res, next) => {
 	User.create(req.body)
 		.then((user) => {
@@ -40,10 +44,24 @@ router.post('/signup', (req, res, next) => {
 		.catch(next);
 });
 
+// DELETE /auth/logout
 router.delete('/logout', (req, res, next) => {
 	req.logout();
 	req.session.destroy();
 	res.sendStatus(204);
+});
+
+// GET /auth/me
+router.get('/me', (req, res, next) => {
+	if (req.user) {
+		res.json({
+			id: req.user.id,
+			email: req.user.email,
+			name: req.user.name,
+		});
+	} else {
+		res.status(204).send('No user is logged in');
+	}
 });
 
 module.exports = router;

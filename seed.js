@@ -26,6 +26,7 @@ const seed = async () => {
 		];
 
 		const user = {
+			name: 'Asdf',
 			email: 'asdf@asdf.com',
 			password: 'abc',
 		};

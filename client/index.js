@@ -11,7 +11,6 @@ import './index.css';
 
 ReactDOM.render(
 	<Provider store={store}>
-		<div>Hello, world!</div>
 		<Main />
 	</Provider>, // <-- Provider tag is for Redux
 	document.getElementById('app') // make sure this is the same as the id of the div in index.html

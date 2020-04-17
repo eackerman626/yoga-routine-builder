@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchMe } from '../store/me';
+import { Link } from 'react-router-dom';
 
 class Login extends Component {
+	constructor() {
+		super();
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
 	async handleSubmit(event) {
 		event.preventDefault();
 		const login = {
 			email: event.target.email.value,
 			password: event.target.password.value,
 		};
-		await axios.put('/auth/login', login);
-	}
-
-	async handleLogout(event) {
-		event.preventDefault();
-		await axios.delete('/auth/logout');
+		try {
+			await axios.put('/auth/login', login);
+			this.props.loadMe();
+			this.props.history.push('/');
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	render() {
@@ -24,15 +33,26 @@ class Login extends Component {
 					<label htmlFor="email">Email: </label>
 					<input name="email" />
 					<label htmlFor="password">Password: </label>
-					<input name="password" />
+					<input name="password" type="password" />
 					<button type="submit">Log In</button>
 				</form>
-				<button type="button" onClick={this.handleLogout}>
-					Log Out
-				</button>
+				<form method="get" action="/auth/google">
+					<button type="submit" className="btn bg-red white p1 rounded">
+						Login with Google
+					</button>
+				</form>
+				<div>
+					New to this site? <Link to="/signup">Create an account</Link>
+				</div>
 			</div>
 		);
 	}
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		loadMe: () => dispatch(fetchMe()),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Login);

@@ -18,6 +18,15 @@ const User = db.define(
 		salt: {
 			type: Sequelize.STRING,
 		},
+		name: {
+			type: Sequelize.STRING,
+		},
+		imageUrl: {
+			type: Sequelize.STRING,
+		},
+		googleId: {
+			type: Sequelize.STRING,
+		},
 	},
 	{
 		hooks: {
