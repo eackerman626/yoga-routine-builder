@@ -11,7 +11,7 @@ class Main extends React.Component {
 		return (
 			<Router>
 				<Route path="/" component={Navbar} />
-				<h2>Welcome to my Boilerplate site!</h2>
+				<h2>Welcome to my Yoga site!</h2>
 				<Route exact path="/example" component={Example} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/signup" component={Signup} />
