@@ -16,14 +16,6 @@ export const fetchMe = () => {
 			// normally, some sort of axios request, e.g.:
 			const results = await axios.get('/auth/me');
 			const me = results.data;
-
-			// for testing, set examples to be an object
-			// const examples = [
-			// 	{ id: 1, name: 'example1' },
-			// 	{ id: 2, name: 'example2' },
-			// 	{ id: 3, name: 'example3' },
-			// ];
-
 			dispatch(setMe(me));
 		} catch (err) {
 			console.log(err);

@@ -1,14 +1,14 @@
 const router = require('express').Router();
 
-const { Example } = require('../db');
+const { Pose } = require('../db');
 
-// GET /api/exampleRoute/
+// GET /api/poses/
 router.get('/', async function (req, res, next) {
 	try {
-		const examples = await Example.findAll();
-		res.send(examples);
+		const poses = await Pose.findAll();
+		res.send(poses);
 	} catch (err) {
-		res.status(404).send('No examples found');
+		res.status(404).send('No poses found');
 	}
 });
 

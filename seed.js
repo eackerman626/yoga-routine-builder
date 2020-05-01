@@ -1,4 +1,4 @@
-const { db, Example, User } = require('./server/db');
+const { db, Pose, User } = require('./server/db');
 
 const seed = async () => {
 	try {
@@ -6,22 +6,39 @@ const seed = async () => {
 			force: true,
 		});
 
-		const examples = [
+		const poses = [
 			{
 				id: 1,
-				name: 'example1',
+				name: 'Downward Facing Dog',
+				category: 'Standing',
+				imageUrl: '/images/treePose.png',
 			},
 			{
 				id: 2,
-				name: 'example2',
+				name: 'Tree',
+				category: 'Standing',
+				direction: 'Left',
+				imageUrl: '/images/treePose.png',
 			},
 			{
 				id: 3,
-				name: 'example3',
+				name: 'Corpse Pose',
+				category: 'Supine',
+				imageUrl: '/images/treePose.png',
 			},
 			{
 				id: 4,
-				name: 'example4',
+				name: 'Half Pigeon',
+				category: 'Sitting',
+				direction: 'Right',
+				imageUrl: '/images/treePose.png',
+			},
+			{
+				id: 5,
+				name: 'Half Pigeon',
+				category: 'Sitting',
+				direction: 'Left',
+				imageUrl: '/images/treePose.png',
 			},
 		];
 
@@ -31,7 +48,7 @@ const seed = async () => {
 			password: 'abc',
 		};
 
-		await Example.bulkCreate(examples);
+		await Pose.bulkCreate(poses);
 		await User.create(user);
 	} catch (err) {
 		console.log(err);

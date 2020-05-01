@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Button } from 'antd';
+import 'antd/dist/antd.css';
 
 import { fetchMe } from '../store/me';
 
@@ -34,15 +36,15 @@ class Navbar extends Component {
 				{me.name ? (
 					<div className="navbar">
 						<p>Hello, {me.name}</p>
-						<button type="button" className="logout_btn" onClick={this.handleLogout}>
+						<Button type="button" className="logout_btn" onClick={this.handleLogout}>
 							Log Out
-						</button>
+						</Button>
 					</div>
 				) : (
 					<div className="navbar">
-						<button type="button" className="login_btn" onClick={this.handleLogInClick}>
+						<Button type="button" className="login_btn" onClick={this.handleLogInClick}>
 							Log in
-						</button>
+						</Button>
 					</div>
 				)}
 			</div>
@@ -52,13 +54,13 @@ class Navbar extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		me: state.me,
+		me: state.me
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadMe: () => dispatch(fetchMe()),
+		loadMe: () => dispatch(fetchMe())
 	};
 };
 

@@ -1,7 +1,6 @@
 const router = require('express').Router();
 
-// /api/exampleRoute
-router.use('/exampleRoute', require('./exampleRouter'));
+router.use('/poses', require('./poseRouter'));
 
 // 404 Error handling
 router.use(function (req, res, next) {

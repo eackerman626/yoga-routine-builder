@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Example from './Example';
+import AllPoses from './AllPoses';
 import Login from './Login';
 import Signup from './Signup';
 import Navbar from './Navbar';
+import Routine from './Routine';
 
 class Main extends React.Component {
 	render() {
@@ -12,7 +13,8 @@ class Main extends React.Component {
 			<Router>
 				<Route path="/" component={Navbar} />
 				<h2>Welcome to my Yoga site!</h2>
-				<Route exact path="/example" component={Example} />
+				<Route path="/home" component={AllPoses} />
+				<Route path="/home" component={Routine} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/signup" component={Signup} />
 			</Router>
