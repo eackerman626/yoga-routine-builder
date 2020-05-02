@@ -42,7 +42,7 @@ class Routine extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="routine_container">
 				<div className="routine_header">
 					<div className="routine_name_form">
 						<Form layout="inline" colon={true}>
@@ -52,14 +52,14 @@ class Routine extends Component {
 						</Form>
 					</div>
 					<div className="routine_buttons">
-						<Button className="routine_button" onClick={this.handleSave}>
-							Save
+						<Button className="routine_button" onClick={this.handleUndo}>
+							Undo
 						</Button>
 						<Button className="routine_button" onClick={this.handleClear}>
 							Clear
 						</Button>
-						<Button className="routine_button" onClick={this.handleUndo}>
-							Undo
+						<Button className="routine_button" onClick={this.handleSave}>
+							Save
 						</Button>
 					</div>
 				</div>

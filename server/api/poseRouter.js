@@ -12,19 +12,4 @@ router.get('/', async function (req, res, next) {
 	}
 });
 
-// POST /api/exampleRoute/
-router.post('/', function (req, res, next) {
-	/* etc */
-});
-
-// PUT /api/exampleRoute/:exampleId
-router.put('/:exampleId', function (req, res, next) {
-	/* etc */
-});
-
-// DELETE /api/exampleRoute/:exampleId
-router.delete('/:exampleId', function (req, res, next) {
-	/* etc */
-});
-
 module.exports = router;

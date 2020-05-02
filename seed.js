@@ -1,4 +1,4 @@
-const { db, Pose, User } = require('./server/db');
+const { db, Pose, User, Routine } = require('./server/db');
 
 const seed = async () => {
 	try {
@@ -45,11 +45,18 @@ const seed = async () => {
 		const user = {
 			name: 'Asdf',
 			email: 'asdf@asdf.com',
-			password: 'abc',
+			password: '123',
+		};
+
+		const routine = {
+			title: 'Routine 1',
+			poseIdAry: [1, 1, 2, 3, 1],
+			userId: 1,
 		};
 
 		await Pose.bulkCreate(poses);
 		await User.create(user);
+		await Routine.create(routine);
 	} catch (err) {
 		console.log(err);
 	}
