@@ -19,8 +19,6 @@ class AllPoses extends Component {
 	}
 
 	render() {
-		const poses = this.props.poses;
-
 		return (
 			<div className="all_poses">
 				<div className="sider">Categories:</div>
