@@ -97,4 +97,11 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	overflow: scroll;
+}
+
+.routine_header {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }
