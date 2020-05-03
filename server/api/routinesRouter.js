@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { Routine } = require('../db');
+const { Routine, Pose } = require('../db');
 
 // GET /api/routines/
 router.get('/', async function (req, res, next) {
@@ -10,7 +10,29 @@ router.get('/', async function (req, res, next) {
 				userId: req.user.id,
 			},
 		});
+		// routines looks like [{id: X, poseIdAry: [1, 2, 3]}, {id: X, poseIdAry: [3, 2, 1]}]
+
 		res.send(routines);
+	} catch (err) {
+		res.status(404).send('No routines found');
+	}
+});
+
+// GET /api/routines/:routineId
+router.get('/:routineId', async function (req, res, next) {
+	try {
+		const routine = await Routine.findByPk(req.params.routineId);
+		const poseIds = routine.poseIdAry;
+		poses = [];
+
+		for (i of poseIds) {
+			console.log('looking for pose id #', poseIds[i]);
+			const pose = await Pose.findByPk(poseIds[i]);
+			poses.push(pose);
+		}
+		// routines looks like [{id: X, poseIdAry: [1, 2, 3]}, {id: X, poseIdAry: [3, 2, 1]}]
+
+		res.send(poses);
 	} catch (err) {
 		res.status(404).send('No routines found');
 	}

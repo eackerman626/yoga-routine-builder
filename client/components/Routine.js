@@ -8,19 +8,25 @@ import axios from 'axios';
 class Routine extends Component {
 	constructor() {
 		super();
+		const selectedRoutine = {
+			id: 123,
+			title: 'Routine123',
+			poseIdAry: [1, 2, 1, 2, 3],
+		};
+
 		this.state = {
-			name: 'New Routine',
-			poses: [],
+			title: 'New Routine',
+			poses: selectedRoutine.poseIdAry,
 			prevState: { poses: [] },
 		};
 
-		this.handleNameChange = this.handleNameChange.bind(this);
+		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleSave = this.handleSave.bind(this);
 		this.handleClear = this.handleClear.bind(this);
 		this.handleUndo = this.handleUndo.bind(this);
 	}
 
-	handleNameChange(evt) {
+	handleTitleChange(evt) {
 		this.setState({ name: evt.target.value });
 	}
 
@@ -47,7 +53,7 @@ class Routine extends Component {
 					<div className="routine_name_form">
 						<Form layout="inline" colon={true}>
 							<Form.Item label="Title">
-								<Input className="name_input" value={this.state.name} onChange={this.handleNameChange} />
+								<Input className="title_input" value={this.state.title} onChange={this.handleTitleChange} />
 							</Form.Item>
 						</Form>
 					</div>

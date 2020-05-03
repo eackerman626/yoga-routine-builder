@@ -8,7 +8,7 @@ import meReducer from './me';
 
 const reducer = combineReducers({
 	// list out all imported reducers
-	poses: poseReducer,
+	allPoses: poseReducer,
 	me: meReducer,
 });
 

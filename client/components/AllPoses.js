@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ReactSortable } from 'react-sortablejs';
 
-import { fetchPoses } from '../store/poses';
+import { fetchAllPoses } from '../store/poses';
 import SinglePose from './SinglePose';
 
 class AllPoses extends Component {
-	constructor(props) {
+	constructor() {
 		super();
 		this.state = {
-			poses: props.poses,
+			allPoses: [],
 		};
 	}
 
 	async componentDidMount() {
-		await this.props.loadPoses();
-		this.setState({ poses: this.props.poses });
+		await this.props.loadAllPoses();
+		this.setState({ allPoses: this.props.allPoses });
 	}
 
 	render() {
@@ -26,11 +26,11 @@ class AllPoses extends Component {
 					group={{ name: 'poses', pull: 'clone', put: 'false' }}
 					animation="150"
 					className="all_poses_content"
-					list={this.state.poses}
-					setList={(newState) => this.setState({ poses: newState })}
+					list={this.state.allPoses}
+					setList={(newState) => this.setState({ allPoses: [...newState] })}
 					sort={false}
 				>
-					{this.state.poses.map((pose) => (
+					{this.state.allPoses.map((pose) => (
 						<SinglePose key={pose.id} pose={pose} />
 					))}
 				</ReactSortable>
@@ -41,13 +41,13 @@ class AllPoses extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		poses: state.poses,
+		allPoses: state.allPoses,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loadPoses: () => dispatch(fetchPoses()),
+		loadAllPoses: () => dispatch(fetchAllPoses()),
 	};
 };
 
