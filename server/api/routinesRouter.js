@@ -23,16 +23,19 @@ router.get('/:routineId', async function (req, res, next) {
 	try {
 		const routine = await Routine.findByPk(req.params.routineId);
 		const poseIds = routine.poseIdAry;
-		poses = [];
+		const poseAry = [];
 
-		for (i of poseIds) {
-			console.log('looking for pose id #', poseIds[i]);
-			const pose = await Pose.findByPk(poseIds[i]);
-			poses.push(pose);
+		for (poseId of poseIds) {
+			const pose = await Pose.findByPk(poseId);
+			poseAry.push(pose);
 		}
-		// routines looks like [{id: X, poseIdAry: [1, 2, 3]}, {id: X, poseIdAry: [3, 2, 1]}]
 
-		res.send(poses);
+		const output = {
+			title: routine.title,
+			poses: poseAry,
+		};
+
+		res.send(output);
 	} catch (err) {
 		res.status(404).send('No routines found');
 	}
@@ -44,8 +47,14 @@ router.post('/', function (req, res, next) {
 });
 
 // PUT /api/exampleRoute/:exampleId
-router.put('/:exampleId', function (req, res, next) {
-	/* etc */
+router.put('/:routineId', async function (req, res, next) {
+	try {
+		const routine = await Routine.findByPk(req.params.routineId);
+		await routine.update({ title: req.body.title, poseIdAry: req.body.poseIdAry });
+		res.status(204).send('Updated routine');
+	} catch (err) {
+		next(err);
+	}
 });
 
 // DELETE /api/exampleRoute/:exampleId

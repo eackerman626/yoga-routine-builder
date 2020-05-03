@@ -8,15 +8,10 @@ import axios from 'axios';
 class Routine extends Component {
 	constructor() {
 		super();
-		const selectedRoutine = {
-			id: 123,
-			title: 'Routine123',
-			poseIdAry: [1, 2, 1, 2, 3],
-		};
 
 		this.state = {
 			title: 'New Routine',
-			poses: selectedRoutine.poseIdAry,
+			poses: [],
 			prevState: { poses: [] },
 		};
 
@@ -26,14 +21,26 @@ class Routine extends Component {
 		this.handleUndo = this.handleUndo.bind(this);
 	}
 
-	handleTitleChange(evt) {
-		this.setState({ name: evt.target.value });
+	async componentDidMount() {
+		console.log('component did mount!');
+		const result = await axios.get(`/api/routines/${this.props.routineId}`);
+		const routine = result.data;
+		this.setState({ title: routine.title, poses: routine.poses });
 	}
 
-	handleSave() {
-		console.log('you clicked save!');
-		console.log('these are the poses you are savig: ');
-		console.log(this.state.poses.map((el) => el.id));
+	handleTitleChange(evt) {
+		console.log('handling title change!');
+		this.setState({ title: evt.target.value });
+	}
+
+	async handleSave() {
+		try {
+			const poseIdAry = this.state.poses.map((el) => el.id);
+			await axios.put(`/api/routines/${this.props.routineId}`, { title: this.state.title, poseIdAry: poseIdAry });
+			console.log('successfully saved!');
+		} catch (err) {
+			console.log('error in handlesave');
+		}
 	}
 
 	handleClear() {
